@@ -1,0 +1,1 @@
+"""Mappings application package."""
