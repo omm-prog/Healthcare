@@ -1,44 +1,109 @@
 # Healthcare Management System — Full-Stack Clinical Portal
 
-A production-quality, secure, and fully tested Healthcare Management System featuring:
-1. **Robust Django REST Framework Backend**: Python 3.10+, Django 5.2 LTS, PostgreSQL / SQLite, JWT Authentication (`djangorestframework-simplejwt`), and OpenAPI 3.0 (`drf-spectacular`).
-2. **Modern React Administration Dashboard**: React, TypeScript, Vite, Tailwind CSS, and React Router, providing an intuitive clinical interface to evaluate and manage all backend services.
+[![Frontend on Vercel](https://img.shields.io/badge/Frontend-Vercel%20Live-black?style=for-the-badge&logo=vercel)](https://healthcare-flax-beta.vercel.app/)
+[![Backend on Render](https://img.shields.io/badge/Backend-Render%20Live-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://healthcare-wjvl.onrender.com/api/docs/)
+[![Database Neon](https://img.shields.io/badge/Database-Neon%20PostgreSQL-00E599?style=for-the-badge&logo=postgresql&logoColor=white)](https://neon.tech)
+[![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Django](https://img.shields.io/badge/Django-5.2%20LTS-092E20?style=for-the-badge&logo=django&logoColor=white)](https://www.djangoproject.com/)
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Tests](https://img.shields.io/badge/Tests-44%2F44%20Passing-brightgreen?style=for-the-badge&logo=pytest)](https://docs.djangoproject.com/en/5.1/topics/testing/)
+
+A production-grade, secure, and fully tested Healthcare Management System featuring:
+1. **Django REST Framework Backend**: Python 3.12, Django 5.2 LTS, Neon Serverless PostgreSQL / SQLite, stateless JWT Authentication (`djangorestframework-simplejwt`), Gunicorn, WhiteNoise, and OpenAPI 3.0 (`drf-spectacular`).
+2. **Modern React Clinical Dashboard**: React 19, TypeScript, Vite, Tailwind CSS, and React Router, delivering a responsive interface for managing patients, certified doctors, and clinical assignment mappings.
+3. **Multi-Tenant Data Isolation**: Strict user-level isolation on patient records with anti-enumeration protection and database-level unique relational constraints.
+
+---
+
+## 🌐 Live Production Deployments
+
+The full-stack application is deployed live on cloud infrastructure and ready for immediate evaluation:
+
+| Service | Hosting Platform | Live URL | Description |
+| :--- | :--- | :--- | :--- |
+| **Frontend Web App** | **Vercel** | [https://healthcare-flax-beta.vercel.app/](https://healthcare-flax-beta.vercel.app/) | Complete React clinical dashboard (Auth, Patients, Doctors, Mappings) |
+| **Interactive API Docs** | **Render** | [https://healthcare-wjvl.onrender.com/api/docs/](https://healthcare-wjvl.onrender.com/api/docs/) | OpenAPI 3.0 / Swagger UI to test every REST API directly in browser |
+| **Backend REST API** | **Render** | [https://healthcare-wjvl.onrender.com/api/](https://healthcare-wjvl.onrender.com/api/) | Live Django API served via Gunicorn and WhiteNoise |
+| **Production Database** | **Neon** | Serverless PostgreSQL (`AWS us-east-2`) | Managed PostgreSQL with connection pooling & SSL enforcement |
+
+> **Note on Cold Starts**: Render's free tier spins down the backend web service after 15 minutes of inactivity. If the first page load takes ~30 seconds, the backend container is spinning up. Subsequent requests respond instantly.
 
 ---
 
 ## Quick Evaluation Guide (For Reviewers)
 
-To quickly evaluate this submission, choose any of the methods below:
-
 | Evaluation Method | Command / URL | What It Verifies |
 | :--- | :--- | :--- |
-| **1. Automated Test Suite** | `python manage.py test tests -v 2` | Executes all **44 test cases** (auth, multi-tenant isolation, doctors, constraints). **100% PASS**. |
-| **2. Interactive Swagger UI** | [http://127.0.0.1:8000/api/docs/](http://127.0.0.1:8000/api/docs/) | OpenAPI 3.0 interactive documentation to test every API endpoint directly in your browser. |
-| **3. React Frontend Portal** | `cd frontend && npm run dev` &rarr; [http://localhost:5173/](http://localhost:5173/) | Complete clinical web application (Registration, Login, Dashboard, Patient CRUD, Doctor Directory, Mappings). |
-| **4. Postman Collection** | Import `postman/healthcare_api.postman_collection.json` | 20+ automated API test requests with auto-token extraction. |
-| **5. Django Admin Panel** | [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/) | Visual database browser with search, filters, and relationship inspection. |
-| **6. Interactive SQL Shell** | `python manage.py dbshell` | Direct command-line SQL queries on the active database tables. |
+| **1. Live Web Portal** | [https://healthcare-flax-beta.vercel.app/](https://healthcare-flax-beta.vercel.app/) | Test live registration, login, patient isolation, doctor directory, and assignments. |
+| **2. Live Swagger API** | [https://healthcare-wjvl.onrender.com/api/docs/](https://healthcare-wjvl.onrender.com/api/docs/) | Test all endpoints interactively with Bearer JWT tokens in browser. |
+| **3. Automated Test Suite** | `python manage.py test tests -v 2` | Executes all **44 test cases** (auth, tenancy isolation, doctor CRUD, relational constraints). **100% PASS**. |
+| **4. Local React Portal** | `cd frontend && npm run dev` &rarr; [http://localhost:5173/](http://localhost:5173/) | Run the local Vite dev server (connected to either local or cloud backend). |
+| **5. Postman Collection** | Import `postman/healthcare_api.postman_collection.json` | 20+ automated API test requests with auto-token extraction and negative test scenarios. |
+| **6. Django Admin Panel** | [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/) or [https://healthcare-wjvl.onrender.com/admin/](https://healthcare-wjvl.onrender.com/admin/) | Visual database browser with search, filters, and relationship inspection. |
 
 ---
 
 ## Table of Contents
 
-1. [Project Overview & Key Features](#project-overview--key-features)
-2. [Technology Stack](#technology-stack)
-3. [Project Directory Structure](#project-directory-structure)
-4. [Backend Setup & Execution](#backend-setup--execution)
-5. [Frontend UI Setup & Execution](#frontend-ui-setup--execution)
-6. [Database Configuration (SQLite & PostgreSQL)](#database-configuration-sqlite--postgresql)
-7. [Comprehensive Verification & Test Report](#comprehensive-verification--test-report)
-8. [API Endpoint Reference](#api-endpoint-reference)
-9. [Route Architecture & Disambiguation](#route-architecture--disambiguation)
-10. [Security & Isolation Architecture](#security--isolation-architecture)
-11. [Postman Collection Instructions](#postman-collection-instructions)
-12. [Troubleshooting Guide](#troubleshooting-guide)
+1. [Live Production Deployments](#-live-production-deployments)
+2. [Quick Evaluation Guide](#quick-evaluation-guide-for-reviewers)
+3. [System Architecture](#system-architecture)
+4. [Key Features](#key-features)
+5. [Technology Stack](#technology-stack)
+6. [Project Directory Structure](#project-directory-structure)
+7. [Cloud Deployment Architecture](#cloud-deployment-architecture)
+8. [Local Backend Setup & Execution](#local-backend-setup--execution)
+9. [Local Frontend Setup & Execution](#local-frontend-setup--execution)
+10. [Database Configuration (Neon Postgres & SQLite)](#database-configuration-neon-postgres--sqlite)
+11. [Comprehensive Verification & Test Report](#comprehensive-verification--test-report)
+12. [API Endpoint Reference](#api-endpoint-reference)
+13. [Route Architecture & Disambiguation](#route-architecture--disambiguation)
+14. [Security & Isolation Architecture](#security--isolation-architecture)
+15. [Postman Collection Instructions](#postman-collection-instructions)
+16. [Troubleshooting Guide](#troubleshooting-guide)
 
 ---
 
-## Project Overview & Key Features
+## System Architecture
+
+```text
+               ┌────────────────────────────────────────────────────────┐
+               │              React 19 Clinical Frontend                │
+               │            (Hosted on Vercel Global CDN)              │
+               │       https://healthcare-flax-beta.vercel.app/         │
+               └──────────────────────────┬─────────────────────────────┘
+                                          │  HTTPS / JWT Authorization
+                                          ▼
+               ┌────────────────────────────────────────────────────────┐
+               │           Django REST Framework API Backend            │
+               │         (Hosted on Render Cloud Web Service)           │
+               │         https://healthcare-wjvl.onrender.com/          │
+               │                                                        │
+               │  ┌───────────────┐ ┌────────────────┐ ┌─────────────┐  │
+               │  │ accounts/     │ │ patients/      │ │ doctors/    │  │
+               │  │ Custom User & │ │ Tenant-Isolated│ │ Directory & │  │
+               │  │ JWT Lifecycle │ │ Patient CRUD   │ │ Specialisms │  │
+               │  └───────────────┘ └────────────────┘ └─────────────┘  │
+               │  ┌──────────────────────────────────────────────────┐  │
+               │  │ mappings/  Atomic Patient-Doctor Relationships   │  │
+               │  └──────────────────────────────────────────────────┘  │
+               │  ┌──────────────────────────────────────────────────┐  │
+               │  │ WhiteNoise (Static Assets) & OpenAPI/Swagger UI │  │
+               │  └──────────────────────────────────────────────────┘  │
+               └──────────────────────────┬─────────────────────────────┘
+                                          │  Encrypted TLS / SSL
+                                          ▼
+               ┌────────────────────────────────────────────────────────┐
+               │           Neon Serverless PostgreSQL Database          │
+               │          (AWS us-east-2 with Pooled Connections)       │
+               └────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Key Features
 
 ### Backend Architecture
 - **Custom Email-Based User Model**: Uses `email` as the unique `USERNAME_FIELD` rather than legacy usernames, utilizing Django's PBKDF2 password hashing.
@@ -47,15 +112,17 @@ To quickly evaluate this submission, choose any of the methods below:
 - **Certified Doctor Directory**: Authenticated users can list, create, view, update, and delete doctor profiles.
 - **Atomic Doctor-Patient Assignments**: Associates doctors with patients with database-level uniqueness constraints (`UniqueConstraint(fields=['patient', 'doctor'])`) and validation preventing duplicate assignments.
 - **Auto-Generated OpenAPI 3.0 Docs**: Interactive Swagger UI with Bearer JWT integration via `drf-spectacular`.
-- **CORS Support**: Integrated `django-cors-headers` allowing seamless communication with the frontend.
+- **CORS Support**: Integrated `django-cors-headers` with automatic whitespace sanitization supporting local development and production Vercel domains.
+- **Production Asset Serving**: `whitenoise` compression and caching for serving static files without requiring third-party storage.
 
 ### Frontend Dashboard Features
 - **Clean Clinical UI**: Professional light theme with subtle slate backgrounds and sky/teal medical accents.
-- **Authentication**: Registration and login with show/hide password toggle and automated JWT token refresh queue.
+- **Authentication**: Registration and login with show/hide password toggle and automated JWT token refresh queue with Axios interceptors.
 - **Dashboard Overview**: Real-time metrics calculated from actual backend queries (total patients, doctors, assignments, and recent activity).
 - **Patient Management**: Patient directory, instant search, detail drawer, registration modal, and edit/delete actions with confirmation dialogs.
 - **Doctor Directory**: Searchable list of doctors and medical specializations with full CRUD modals.
 - **Patient–Doctor Mapping Manager**: View assigned doctors for specific patients, create atomic assignments, and remove assignments.
+- **SPA Client-Side Routing**: Configured with `vercel.json` rewrite rules to prevent 404 errors on deep route reloads.
 
 ---
 
@@ -66,17 +133,23 @@ To quickly evaluate this submission, choose any of the methods below:
 | **Backend** | Language | Python | 3.10+ / 3.12+ |
 | | Web Framework | Django | 5.2 LTS |
 | | API Framework | Django REST Framework (DRF) | 3.15+ |
-| | Database Engine | SQLite (Zero-Setup) / PostgreSQL | 14+ / 16+ / 18+ |
+| | Production Server | Gunicorn | 23.0+ |
+| | Static File Server | WhiteNoise | 6.12+ |
+| | Production DB | Neon Serverless PostgreSQL | 16+ |
+| | Local DB Engine | SQLite (Zero-Setup) / PostgreSQL | 3.x / 14+ |
 | | Authentication | Simple JWT (`djangorestframework-simplejwt`) | 5.4+ |
 | | Documentation | OpenAPI 3.0 / `drf-spectacular` | 0.28+ |
 | | CORS Management | `django-cors-headers` | 4.9+ |
-| **Frontend** | Framework | React | 18.3+ / 19.0+ |
-| | Language | TypeScript | 5.x+ |
-| | Build Tool & Bundler | Vite | 6.x+ |
+| **Frontend** | Framework | React | 19.0+ |
+| | Language | TypeScript | 5.x / 6.x |
+| | Build Tool & Bundler | Vite | 6.x / 8.x |
 | | Styling | Tailwind CSS | 3.4+ |
-| | Routing | React Router (`react-router-dom`) | 6.x+ |
+| | Routing | React Router (`react-router-dom`) | 7.x |
 | | HTTP Client | Axios (with JWT interceptors) | 1.7+ |
 | | Icons | Lucide React | Latest |
+| **Deployment** | Backend Host | Render (Web Service) | Free Tier |
+| | Frontend Host | Vercel (Global Edge Network) | Free Tier |
+| | Database Host | Neon.tech (Managed Postgres) | Free Tier |
 
 ---
 
@@ -85,11 +158,11 @@ To quickly evaluate this submission, choose any of the methods below:
 ```text
 healthcare-backend/
 ├── config/                      # Django core configuration & settings
-│   ├── settings.py              # Environment settings, CORS, REST Framework, JWT
+│   ├── settings.py              # Environment settings, CORS, REST Framework, JWT, WhiteNoise
 │   ├── urls.py                  # Root URL routing, Swagger UI, app inclusion
 │   ├── exceptions.py            # Centralized exception handler
 │   ├── asgi.py & wsgi.py
-├── accounts/                    # Custom User model & JWT authentication
+│├── accounts/                    # Custom User model & JWT authentication
 │   ├── models.py                # User with email as unique USERNAME_FIELD
 │   ├── managers.py              # CustomUserManager with email normalization
 │   ├── serializers.py           # Registration, login, and user summary serializers
@@ -128,11 +201,13 @@ healthcare-backend/
 │   │   ├── types/               # TypeScript interfaces
 │   │   ├── App.tsx & main.tsx
 │   │   └── index.css            # Tailwind directives
+│   ├── vercel.json              # Client-side SPA routing rewrites for Vercel
 │   ├── package.json
 │   ├── vite.config.ts           # Reverse proxy (/api -> :8000)
 │   └── README.md
 ├── postman/
 │   └── healthcare_api.postman_collection.json # Exportable Postman collection
+├── build.sh                     # Render deployment build script (install, collectstatic, migrate)
 ├── manage.py
 ├── requirements.txt
 ├── .env & .env.example
@@ -142,7 +217,33 @@ healthcare-backend/
 
 ---
 
-## Backend Setup & Execution
+## Cloud Deployment Architecture
+
+The application is deployed across three services to maintain high availability and zero hosting costs:
+
+### 1. Backend on Render (`healthcare-wjvl.onrender.com`)
+- **Runtime**: Python 3.12 with Gunicorn WSGI.
+- **Build Command**: `./build.sh` (executes dependency installation, `collectstatic`, and database migrations).
+- **Static Assets**: Handled by WhiteNoise (`CompressedManifestStaticFilesStorage`).
+- **Environment Configuration**:
+  - `DEBUG=False`
+  - `ALLOWED_HOSTS=.onrender.com,localhost,127.0.0.1`
+  - `DATABASE_URL=postgresql://neondb_owner:***@ep-nameless-violet-b50zglon-pooler.c-7.us-east-2.aws.neon.tech/neondb?sslmode=require`
+  - `CORS_ALLOWED_ORIGINS=https://healthcare-flax-beta.vercel.app,http://localhost:5173,http://localhost:3000`
+
+### 2. Frontend on Vercel (`healthcare-flax-beta.vercel.app`)
+- **Framework**: Vite + React 19 + TypeScript.
+- **Routing**: `vercel.json` rewrites all requests to `/index.html` to prevent 404 errors on deep linking.
+- **Environment Configuration**:
+  - `VITE_API_BASE_URL=https://healthcare-wjvl.onrender.com/api`
+
+### 3. Database on Neon (`neon.tech`)
+- **Engine**: Managed PostgreSQL 16 (AWS `us-east-2`).
+- **Connection Mode**: Pooled endpoint with SSL requirement to manage concurrency smoothly without dropping connections.
+
+---
+
+## Local Backend Setup & Execution
 
 ### 1. Activate the Virtual Environment
 
@@ -173,7 +274,7 @@ python manage.py test tests -v 2
 ```
 Expected output:
 ```text
-Ran 44 tests in ~25s
+Ran 44 tests in ~24s
 OK
 ```
 
@@ -188,7 +289,7 @@ The backend API will be available at:
 
 ---
 
-## Frontend UI Setup & Execution
+## Local Frontend Setup & Execution
 
 The frontend is located in the `frontend/` folder.
 
@@ -218,11 +319,17 @@ Generates a fully typed, minified production bundle in `frontend/dist/`.
 
 ---
 
-## Database Configuration (SQLite & PostgreSQL)
+## Database Configuration (Neon Postgres & SQLite)
 
-The backend supports both SQLite (default for zero-setup evaluation) and PostgreSQL.
+The backend seamlessly supports Neon Cloud PostgreSQL, local PostgreSQL, and zero-setup SQLite.
 
-### Option A: SQLite (Default — Ready Out of the Box)
+### Option A: Neon Cloud PostgreSQL (Production)
+In your cloud dashboard or `.env`:
+```env
+DATABASE_URL=postgresql://neondb_owner:***@ep-nameless-violet-b50zglon-pooler.c-7.us-east-2.aws.neon.tech/neondb?sslmode=require
+```
+
+### Option B: Local SQLite (Zero-Setup Default)
 In `.env`:
 ```env
 DB_ENGINE=django.db.backends.sqlite3
@@ -230,33 +337,21 @@ USE_SQLITE_FOR_TESTS=True
 ```
 No external database software or configuration is required. All data is saved directly in `db.sqlite3`.
 
-### Option B: PostgreSQL
-If you prefer running against a live PostgreSQL database:
-1. Open PostgreSQL shell (`psql`):
-   ```sql
-   CREATE USER healthcare_user WITH PASSWORD 'secure_password_here';
-   CREATE DATABASE healthcare_db OWNER healthcare_user;
-   GRANT ALL PRIVILEGES ON DATABASE healthcare_db TO healthcare_user;
-   ```
-2. Update your `.env`:
-   ```env
-   DB_ENGINE=django.db.backends.postgresql
-   DB_NAME=healthcare_db
-   DB_USER=healthcare_user
-   DB_PASSWORD=secure_password_here
-   DB_HOST=localhost
-   DB_PORT=5432
-   ```
-3. Run migrations:
-   ```bash
-   python manage.py migrate
-   ```
+### Option C: Local PostgreSQL
+```env
+DB_ENGINE=django.db.backends.postgresql
+DB_NAME=healthcare_db
+DB_USER=healthcare_user
+DB_PASSWORD=secure_password_here
+DB_HOST=localhost
+DB_PORT=5432
+```
 
 ---
 
 ## Comprehensive Verification & Test Report
 
-All system capabilities were rigorously tested across two suites:
+All system capabilities were rigorously tested across two test suites:
 1. **Django Automated Test Suite**: 44 test cases covering models, serializers, views, permissions, and database constraints.
 2. **Live HTTP API Verification**: 24 end-to-end integration requests executed against the active HTTP server.
 
@@ -403,6 +498,7 @@ Both operations share the path pattern `/api/mappings/<int:pk>/`. To prevent col
 4. **Client-Supplied Ownership Protection**: The `owner` field on `Patient` cannot be supplied or manipulated by the client (`read_only=True`). The backend assigns `request.user` automatically.
 5. **Database-Level Integrity Constraints**: Patient-Doctor mappings enforce `UniqueConstraint(fields=['patient', 'doctor'])` to guarantee uniqueness even under concurrent race conditions.
 6. **Stateless JWT Protection**: Authorization tokens are validated per-request without server-side session overhead.
+7. **Error Masking Handler**: Unhandled exceptions and database integrity errors are intercepted by `custom_exception_handler` to prevent leaking SQL structures or stack traces to clients.
 
 ---
 
@@ -414,7 +510,9 @@ An exportable Postman collection is located at:
 ### Import Instructions
 1. Open **Postman** and click **Import** (top left).
 2. Select the file `postman/healthcare_api.postman_collection.json`.
-3. Set the collection variable `base_url` to `http://127.0.0.1:8000`.
+3. Set the collection variable `base_url` to:
+   - For local: `http://127.0.0.1:8000`
+   - For live cloud: `https://healthcare-wjvl.onrender.com`
 
 ### Automated Execution Sequence
 The collection contains built-in test scripts that automatically capture tokens and IDs:
@@ -437,24 +535,24 @@ Ensure you have activated the virtual environment before running commands:
 .venv\Scripts\Activate.ps1
 ```
 
-### 2. Password authentication failed for user `healthcare_user` in `psql`
-The default setup uses SQLite (`db.sqlite3`), which requires no PostgreSQL credentials. If you wish to use PostgreSQL:
-1. Open `psql` as the default `postgres` user: `psql -U postgres`
-2. Create `healthcare_user` with password: `CREATE USER healthcare_user WITH PASSWORD 'secure_password_here';`
-3. Create `healthcare_db`: `CREATE DATABASE healthcare_db OWNER healthcare_user;`
-4. Set matching credentials in `.env`.
-
-### 3. Frontend Displays Network Error
-Verify that the Django development server is running in another terminal on port 8000:
+### 2. Frontend Displays Network Error
+Verify that the backend is active. If running locally, verify:
 ```powershell
 python manage.py runserver
 ```
+If connecting to the cloud backend, verify `VITE_API_BASE_URL` in `frontend/.env` is set to `https://healthcare-wjvl.onrender.com/api`.
+
+### 3. Render Web Service Cold Start Delay
+On the free Render tier, the web service spins down after 15 minutes of inactivity. When accessed again, the first request takes ~30 seconds to wake the service up.
 
 ---
 
 ## Submission Checklist
 
-- [x] Django REST Framework backend fully implemented.
+- [x] **Live Frontend Web App** deployed on Vercel: [https://healthcare-flax-beta.vercel.app/](https://healthcare-flax-beta.vercel.app/)
+- [x] **Live Interactive Swagger Docs** deployed on Render: [https://healthcare-wjvl.onrender.com/api/docs/](https://healthcare-wjvl.onrender.com/api/docs/)
+- [x] **Live Managed PostgreSQL Database** configured with Neon.
+- [x] Django REST Framework backend with Gunicorn and WhiteNoise.
 - [x] Custom User model with email authentication & PBKDF2 hashing.
 - [x] Simple JWT authentication lifecycle (Register, Login, Refresh).
 - [x] Multi-tenant patient record isolation (ownership enforcement).
@@ -464,5 +562,6 @@ python manage.py runserver
 - [x] OpenAPI 3.0 / Swagger UI documentation at `/api/docs/`.
 - [x] Automated test suite with **44/44 test cases passing**.
 - [x] Complete React + TypeScript + Vite + Tailwind CSS frontend dashboard.
+- [x] SPA client-side routing with `vercel.json`.
 - [x] Postman collection included and documented.
-- [x] Full setup guide for both backend and frontend.
+- [x] Comprehensive setup guide for both local execution and cloud deployment.
