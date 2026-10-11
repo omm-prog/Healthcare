@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -84,6 +85,7 @@ ASGI_APPLICATION = 'config.asgi.application'
 # SQLite is only used when explicitly enabled via DB_ENGINE or USE_SQLITE_FOR_TESTS (never silently in production).
 DB_ENGINE = env('DB_ENGINE', default='django.db.backends.postgresql')
 USE_SQLITE_FOR_TESTS = env.bool('USE_SQLITE_FOR_TESTS', default=False)
+DATABASE_URL = env('DATABASE_URL', default=None)
 
 if 'test' in sys.argv and USE_SQLITE_FOR_TESTS:
     DATABASES = {
@@ -92,6 +94,11 @@ if 'test' in sys.argv and USE_SQLITE_FOR_TESTS:
             'NAME': ':memory:',
         }
     }
+elif DATABASE_URL:
+    DATABASES = {
+        'default': env.db('DATABASE_URL')
+    }
+    DATABASES['default']['CONN_MAX_AGE'] = 60
 elif DB_ENGINE == 'django.db.backends.sqlite3':
     DATABASES = {
         'default': {
@@ -141,6 +148,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
