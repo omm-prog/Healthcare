@@ -212,7 +212,7 @@ SPECTACULAR_SETTINGS = {
 }
 
 # CORS Configuration
-CORS_ALLOWED_ORIGINS = env.list(
+_raw_cors = env.list(
     'CORS_ALLOWED_ORIGINS',
     default=[
         'http://localhost:5173',
@@ -221,6 +221,7 @@ CORS_ALLOWED_ORIGINS = env.list(
         'http://127.0.0.1:3000',
     ]
 )
+CORS_ALLOWED_ORIGINS = [origin.strip() for origin in _raw_cors if origin.strip()]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = DEBUG
 
